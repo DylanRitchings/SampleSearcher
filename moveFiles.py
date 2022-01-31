@@ -1,45 +1,46 @@
 #!/usr/bin/env python
 
 import os
-import shutil
+
+# import shutil
 
 newDir = "/NewSamples"
 oldDir = "/OldSamples"
 startDirectory = os.getcwd()
 newPath = startDirectory + newDir
-wordDict = {"kick": "/kick/", "snare": "/snare/", "hat": "/hats/"}
+wordDict = {
+    "kick": "/kick/",
+    "snare": "/snare/",
+    "hat": "/hats/",
+    "crash": "/crash/",
+    "tambourine": "/tambourine/",
+}
 moveCount = 0
 memMoved = 0
 
 
-def aa(one, two):
-    print("AAAAAAAAAAAAAAAAa")
-    print(one)
-    print(two)
-
-
 # fPath needs to be  new file path
-def fileExists(fPath):
-    count = 1
+def fileExists(fileName, newDir):
+    count = 0
+    fPath = newDir + fileName
+    newPath = fPath
     while True:
-        if os.path.exists(fPath):
-            aa(fPath, newDir)
+        if os.path.exists(newPath):
             count += 1
+            # fPath += 1
         else:
-            False
-    if count == 1:
-        return fPath
-    else:
+            break
         splitPath = fPath.split(".")
-        return splitPath[0] + count + splitPath[1]
+        newPath = splitPath[0] + str(count) + "." + splitPath[1]
+    return newPath
 
 
-def moveFile(fPath, newDir):
-    newFPath = fileExists(fPath)
-    shutil.move(newFPath, newDir)
+def moveFile(fPath, newPath):
+    # newFPath = fileExists(fPath)
+    os.rename(fPath, newPath)
     global moveCount
-    print(newDir)
-    print(fPath)
+    # print(newDir)
+    # print(fPath)
     moveCount += 1
     print(moveCount, " files moved", end="\r")
 
@@ -48,9 +49,14 @@ def moveFile(fPath, newDir):
 # returns new path
 def checkFile(fPath):
     for word, newDir in wordDict.items():
+        newCompPath = newPath + newDir
+
+        if not os.path.exists(newCompPath):
+            os.makedirs(newCompPath)
+
         if word in fPath.lower():
             # aa(fPath, word)
-            return newPath + newDir
+            return newCompPath
             # moveFile(fPath, startDirectory + newDir)
             # break
 
@@ -63,8 +69,8 @@ def checkFile(fPath):
 
 
 def folderLoop(dirPath):
-    for filename in os.listdir(dirPath):
-        currentFPath = dirPath + "/" + filename
+    for fileName in os.listdir(dirPath):
+        currentFPath = dirPath + "/" + fileName
 
         # Folder or file
         if os.path.isdir(currentFPath):
@@ -73,6 +79,7 @@ def folderLoop(dirPath):
             newDir = checkFile(currentFPath)
             if newDir is not None:
                 # START HERE
+                newPath = fileExists(fileName, newDir)
                 moveFile(currentFPath, newPath)
 
 
