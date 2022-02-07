@@ -9,6 +9,7 @@ oldDir = "/OldSamples"
 startDirectory = os.getcwd()
 newPath = startDirectory + newDir
 wordDict = {
+    ## Drums
     # Breaks
     "break": "/drums/breaks/",
     "beat": "/drums/breaks/",
@@ -18,6 +19,9 @@ wordDict = {
     "hats": "/drums/breaks/hats/",
     "tops": "/drums/breaks/tops/",
     "crescendo": "/drums/breaks/crescendo/",
+    "drum loop": "/drums/breaks/",
+    "drum_loop": "/drums/breaks/",
+    "drum_lp": "/drums/breaks/",
     # One Shots
     "kick": "/drums/oneshots/kicks/",
     "bell": "/drums/oneshots/bells/",
@@ -28,28 +32,77 @@ wordDict = {
     "crash": "/drums/oneshots/crash/",
     "tambourine": "/drums/oneshots/tambourines/",
     "shaker": "/drums/oneshots/shakers/",
+    "clap": "/drums/clap/",
+    "klack": "/drums/clap/",
     # AFRICAN
     "slit": "/drums/oneshots/African/slits/",
     "burundi": "/drums/oneshots/African/burundi/",
     "log": "/drums/oneshots/African/logs/",
     "udu": "/drums/oneshots/African/Nigerian Udus/",
     "conga": "/drums/oneshots/African/congas/",
+    "wood": "/drums/oneshots/African/wood/",
+    "afr": "/drums/oneshots/African/misc",
+    # Misc
+    "kit": "/drums/oneshots/misc/",
+    "hit": "/drums/oneshots/misc/",
+    # "drum": "/drums/misc/",
+    ## Wrest
+    # Instruments
+    "guitar": "/instruments/guitar/",
+    "rhodes": "/instruments/rhodes/",
+    "piano": "/instruments/piano/",
+    "bass": "/instruments/bass/",
+    "fx": "/instruments/FX/",
+    "bleep": "/instruments/FX/",
+    "horn": "/instruments/horn/",
+    "arp": "/instruments/arps/",
+    "string": "/instruments/strings/",
+    "vocal": "/instruments/vocals/",
+    "voice": "/instruments/vocals/",
+    "flute": "/instruments/flute/",
+    "key": "/instruments/keys/",
+    "voco": "/instruments/vocals/",
+    "synth": "/instruments/synths/",
+    "drone": "/instruments/drone/",
+    "orchestra": "/instruments/orchestra/",
+    "acoustic": "/instruments/guitar/acoustic/",
+    "elec": "/instruments/guitar/electric/",
+    "guitar": "/instruments/guitar/",
+    "gtr": "/instruments/guitar/",
+    "tone": "/instruments/tone/",
+    "pad": "/instruments/pad/",
+    # Genres
+    "house": "/genre/junk/housejunk/",
+    "techno": "/genre/junk/techno/",
+    "trap": "/genre/junk/trap/",
+    "edm": "/genre/junk/edm/",
+    "dubstep": "/genre/junk/dubstep/",
+    "blues": "/genre/blues/",
+    "hip": "/genre/hiphop/",
+    "ambi": "/genre/ambient/",
+    "funk": "/genre/funk/",
+    "reggae": "/genre/reggae/",
+    "jazz": "/genre/jazz/",
+    # Samples
+    "maj": "/samples/major/",
+    "min": "/samples/minor/",
+    "malice": "/samples/malice/",
+    "jungle": "/samples/loops/jungle",
+    "chord": "/samples/chords/",
+    "drop": "/samples/drop/",
+    "creak": "/samples/creak/",
     # Other
-    "piano": "/piano/",
-    "fx": "/FX/",
-    "pluck": "/pluck/",
-    "pick": "/picking/",
-    "horn": "/horn/",
-    "arp": "/arps/",
-    # "am": "/tuned/",
-    # "bm": "/tuned/",
-    # "cm": "/tuned/",
-    # "dm": "/tuned/",
-    # "em": "/tuned/",
-    # "fm": "/tuned/",
-    # "gm": "/tuned/",
+    "pluck": "/samples/pluck/",
+    "pick": "/samples/picking/",
+    "bpm": "/bpm/",
     "#": "/tuned/",
+    # Breaks again
+    "prc": "/drums/breaks",
+    "perc": "/drums/breaks",
+    "drums": "/drums/breaks/",
+    "loop": "/samples/loop/",
 }
+
 moveCount = 0
 noMoveCount = 0
 memMoved = 0
@@ -73,7 +126,7 @@ def fileExists(fileName, newDir):
 
 def moveFile(fPath, newPath):
     # newFPath = fileExists(fPath)
-    # os.rename(fPath, newPath)
+    os.copy(fPath, newPath)
     global moveCount
     moveCount += 1
     print(moveCount, " files moved", end="\r")
